@@ -15,18 +15,29 @@ hibernate级联保存、级联删除、级联更新
 3. 包含过车记录表，记录过车信息，包含阶段信息列表（更具体的请看代码Model层，里面有详细的介绍）
 
 功能点：
+
 1.删除ParkModel，所有Model全部删除
+
 2.删除CrossingModel，同时删除CrossingStateModel，RecordModel，SectionModel
+
 3.删除CrossingStateModel，只删除CrossingStateModel
+
 4.删除RecordModel，同时删除SectionModel
 
+
 5.保存CrossingModel，同时保存ParkModel
+
 6.保存RecordModel，同时保存SectionModel
+
 7.保存CrossingStateModel，同时保存CrossingModel
 
+
 8.更新ParkModel时，可以更新
+
 9.更新CrossingModel时，ParkModel同时更新
-9.更新RecordModel时，SectionModel同时更新
+
+10.更新RecordModel时，SectionModel同时更新
+
 
 问题点（与功能点对应）：
 1. ParkModel是CrossingModel外键关联的主键表
