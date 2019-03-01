@@ -27,7 +27,7 @@ public class CascadeController {
      *
      * @return 结果
      */
-    @RequestMapping("test1")
+    @RequestMapping("test/save")
     public String test1(){
         String res = "ok";
         this.cascadeService.cascadeSave();
@@ -39,7 +39,7 @@ public class CascadeController {
      *
      * @return 结果
      */
-    @RequestMapping("test2")
+    @RequestMapping("test/delete")
     public String test2(){
         String res = "ok";
         this.cascadeService.cascadeDelete();
@@ -51,7 +51,7 @@ public class CascadeController {
      *
      * @return 结果
      */
-    @RequestMapping("test3")
+    @RequestMapping("test/update")
     public String test3(){
         String res = "ok";
         this.cascadeService.cascadeUpdate();

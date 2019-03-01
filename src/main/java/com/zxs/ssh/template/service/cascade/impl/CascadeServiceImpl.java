@@ -39,7 +39,7 @@ public class CascadeServiceImpl implements ICascadeService{
         crossingModel.setParkModel(parkModel);
         this.commonDao.save(crossingModel);*/
 
-        RecordModel recordModel = new RecordModel();
+/*        RecordModel recordModel = new RecordModel();
         recordModel.setRecordState("NORMAL");
         recordModel.setCrossingModel(this.commonDao.queryAll(CrossingModel.class).get(0));
         List<SectionModel> sectionModels = new ArrayList<>();
@@ -50,12 +50,12 @@ public class CascadeServiceImpl implements ICascadeService{
             sectionModels.add(sectionModel);
         }
         recordModel.setSectionModels(sectionModels);
-        this.commonDao.save(recordModel);
+        this.commonDao.save(recordModel);*/
 
-/*        CrossingStateModel crossingStateModel = new CrossingStateModel();
+        CrossingStateModel crossingStateModel = new CrossingStateModel();
         crossingStateModel.setCrossingState("NORMAL");
         crossingStateModel.setCrossingModel(this.commonDao.queryAll(CrossingModel.class).get(0));
-        this.commonDao.save(crossingStateModel);*/
+        this.commonDao.save(crossingStateModel);
     }
 
     /**
@@ -63,9 +63,24 @@ public class CascadeServiceImpl implements ICascadeService{
      */
     @Override
     public void cascadeDelete() {
-        List<ParkModel> list = this.commonDao.queryAll(ParkModel.class);
+/*        List<ParkModel> list = this.commonDao.queryAll(ParkModel.class);
         if(list != null && !list.isEmpty()){
             this.commonDao.delete(list.get(0));
+        }*/
+
+/*        CrossingModel crossingModel = this.commonDao.queryModel(null,CrossingModel.class);
+        if(crossingModel != null){
+            this.commonDao.delete(crossingModel);
+        }*/
+
+/*        RecordModel recordModel = this.commonDao.queryModel(null,RecordModel.class);
+        if(recordModel != null){
+            this.commonDao.delete(recordModel);
+        }*/
+
+        CrossingStateModel crossingStateModel = this.commonDao.queryModel(null,CrossingStateModel.class);
+        if(crossingStateModel != null){
+            this.commonDao.delete(crossingStateModel);
         }
     }
 
@@ -74,19 +89,6 @@ public class CascadeServiceImpl implements ICascadeService{
      */
     @Override
     public void cascadeUpdate() {
-        List<RecordModel> list = this.commonDao.queryAll(RecordModel.class);
-        if(list != null && !list.isEmpty()){
-            RecordModel recordModel = list.get(0);
-            recordModel.setRecordState("EXCEPTION");
-            List<SectionModel> sectionModels = recordModel.getSectionModels();
-            for (int i = 0; i < sectionModels.size(); i++) {
-                SectionModel sectionModel = sectionModels.get(i);
-                sectionModel.setSectionState("EXCEPTION");
-            }
-            recordModel.setSectionModels(sectionModels);
-            this.commonDao.update(recordModel);
-        }
-
 /*        List<CrossingModel> list = this.commonDao.queryAll(CrossingModel.class);
         if(list != null && !list.isEmpty()){
             CrossingModel crossingModel = list.get(0);
@@ -97,11 +99,26 @@ public class CascadeServiceImpl implements ICascadeService{
             this.commonDao.update(crossingModel);
         }*/
 
-/*        List<ParkModel> list = this.commonDao.queryAll(ParkModel.class);
+/*        List<RecordModel> list = this.commonDao.queryAll(RecordModel.class);
         if(list != null && !list.isEmpty()){
-            ParkModel parkModel = list.get(0);
-            parkModel.setParkName("D区西门停车场");
-            this.commonDao.update(parkModel);
+            RecordModel recordModel = list.get(0);
+            recordModel.setRecordState("EXCEPTION");
+            List<SectionModel> sectionModels = recordModel.getSectionModels();
+            for (int i = 0; i < sectionModels.size(); i++) {
+                SectionModel sectionModel = sectionModels.get(i);
+                sectionModel.setSectionState("EXCEPTION");
+            }
+            recordModel.setSectionModels(sectionModels);
+            this.commonDao.update(recordModel);
         }*/
+
+        CrossingStateModel crossingStateModel = this.commonDao.queryModel(null,CrossingStateModel.class);
+        if(crossingStateModel != null){
+            crossingStateModel.setCrossingState("EXCEPTION4");
+            CrossingModel crossingModel = crossingStateModel.getCrossingModel();
+            crossingModel.setCrossingName("test4");
+            crossingStateModel.setCrossingModel(null);
+            this.commonDao.update(crossingStateModel);
+        }
     }
 }
